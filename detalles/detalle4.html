@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle - Clases de Salsa</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <h1>Detalle de Actividad</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../listado.html">Volver al listado</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Clases de Salsa</h2>
+        <ul>
+            <li><strong>Inicio:</strong> 2025-05-14 12:00</li>
+            <li><strong>Término:</strong> 2025-05-14 13:30</li>
+            <li><strong>Región:</strong> Metropolitana</li>
+            <li><strong>Comuna:</strong> Santiago</li>
+            <li><strong>Sector:</strong> Beauchef 851, Sala aeróbica</li>
+            <li><strong>Organizador:</strong> Camila Jara</li>
+            <li><strong>Email:</strong> camila@salsacl.cl</li>
+            <li><strong>Celular:</strong> +569.11223344</li>
+            <li><strong>Contacto por:</strong> WhatsApp</li>
+            <li><strong>Descripción:</strong> Clase de salsa abierta, trae pareja o ven solo.</li>
+            <li><strong>Tema:</strong> Baile</li>
+        </ul>
+
+        <h3>Galería de fotos</h3>
+        <div class="galeria">
+            <img src="../img/clase_salsa.jpg" alt="Salsa 1" onclick="ampliar(this)">
+            <img src="../img/salsa2.jpg" alt="Salsa 2" onclick="ampliar(this)">
+            <img src="../img/salsa3.jpg" alt="Salsa 3" onclick="ampliar(this)">
+            <img src="../img/salsa4.jpg" alt="Salsa 4" onclick="ampliar(this)">
+        </div>
+
+        <div id="imagen-ampliada">
+            <img src="" alt="Grande" id="imagen-grande">
+            <div id="cerrar-imagen" onclick="cerrarImagen()">Cerrar</div>
+        </div>
+    </main>
+
+    <script>
+        function ampliar(img) {
+            document.getElementById('imagen-grande').src = img.src;
+            document.getElementById('imagen-ampliada').style.display = 'block';
+        }
+        function cerrarImagen() {
+            document.getElementById('imagen-ampliada').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

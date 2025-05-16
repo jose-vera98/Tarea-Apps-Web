@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Actividad - Escuela de Boxeo</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <h1>Detalle de Actividad</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../listado.html">Volver al listado</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Escuela de Boxeo</h2>
+        <ul>
+            <li><strong>Inicio:</strong> 2025-03-28 12:00</li>
+            <li><strong>Término:</strong> 2025-03-28 14:00</li>
+            <li><strong>Región:</strong> Metropolitana</li>
+            <li><strong>Comuna:</strong> Santiago</li>
+            <li><strong>Sector:</strong> Beauchef 850, terraza</li>
+            <li><strong>Organizador:</strong> Juan Pérez</li>
+            <li><strong>Email:</strong> juan.perez@example.com</li>
+            <li><strong>Celular:</strong> +569.12345678</li>
+            <li><strong>Contacto por:</strong> Instagram: @boxeo_scl</li>
+            <li><strong>Descripción:</strong> Clase gratuita para principiantes, ¡trae tu botella de agua!</li>
+            <li><strong>Tema:</strong> Deporte</li>
+        </ul>
+
+        <h3>Galería de fotos</h3>
+        <div class="galeria">
+            <img src="../img/boxeo.jpg" alt="Boxeo 1" onclick="ampliar(this)">
+            <img src="../img/boxeo2.jpg" alt="Boxeo 2" onclick="ampliar(this)">
+            <img src="../img/boxeo3.jpg" alt="Boxeo 3" onclick="ampliar(this)">
+        </div>
+
+        <div id="imagen-ampliada">
+            <img src="" alt="Grande" id="imagen-grande">
+            <div id="cerrar-imagen" onclick="cerrarImagen()">Cerrar</div>
+        </div>
+    </main>
+
+    <script>
+        function ampliar(img) {
+            const grande = document.getElementById('imagen-grande');
+            const contenedor = document.getElementById('imagen-ampliada');
+            grande.src = img.src;
+            contenedor.style.display = 'block';
+        }
+
+        function cerrarImagen() {
+            document.getElementById('imagen-ampliada').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

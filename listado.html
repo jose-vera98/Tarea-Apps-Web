@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Actividades</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        tr:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Listado de actividades</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="formulario.html">Agregar actividad</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Actividades registradas</h2>
+        <table class="tabla_actividades">
+            <thead>
+                <tr>
+                    <th>Inicio</th>
+                    <th>Término</th>
+                    <th>Comuna</th>
+                    <th>Sector</th>
+                    <th>Tema</th>
+                    <th>Organizador</th>
+                    <th>Total Fotos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr onclick="location.href='detalles/detalle1.html'">
+                    <td>2025-03-28 12:00</td>
+                    <td>2025-03-28 14:00</td>
+                    <td>Santiago</td>
+                    <td>Beauchef 850, terraza</td>
+                    <td>Escuela de Boxeo</td>
+                    <td>Juan Pérez</td>
+                    <td>3</td>
+                </tr>
+                <tr onclick="location.href='detalles/detalle2.html'">
+                    <td>2025-03-29 19:00</td>
+                    <td>2025-03-29 20:00</td>
+                    <td>Ñuñoa</td>
+                    <td>Plaza Ñuñoa</td>
+                    <td>Cómo deshidratar fruta</td>
+                    <td>Laura Díaz</td>
+                    <td>2</td>
+                </tr>
+                <tr onclick="location.href='detalles/detalle3.html'">
+                    <td>2025-03-30 18:00</td>
+                    <td></td>
+                    <td>Santiago</td>
+                    <td>Parque O’Higgins</td>
+                    <td>Música urbana</td>
+                    <td>DJ Rata</td>
+                    <td>1</td>
+                </tr>
+                <tr onclick="location.href='detalles/detalle4.html'">
+                    <td>2025-05-14 12:00</td>
+                    <td>2025-05-14 13:30</td>
+                    <td>Santiago</td>
+                    <td>Beauchef 851, Sala aeróbica</td>
+                    <td>Clases de Salsa</td>
+                    <td>Camila Jara</td>
+                    <td>4</td>
+                </tr>
+                <tr onclick="location.href='detalles/detalle5.html'">
+                    <td>2025-05-15 13:30</td>
+                    <td>2025-05-15 15:00</td>
+                    <td>Santiago</td>
+                    <td>Beauchef 851, Sala CDI</td>
+                    <td>Torneo Carecaca La Mona</td>
+                    <td>Anakena FC</td>
+                    <td>5</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
