@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle - Deshidratar fruta</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <h1>Detalle de Actividad</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../listado.html">Volver al listado</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Cómo deshidratar fruta</h2>
+        <ul>
+            <li><strong>Inicio:</strong> 2025-03-29 19:00</li>
+            <li><strong>Término:</strong> 2025-03-29 20:00</li>
+            <li><strong>Región:</strong> Metropolitana</li>
+            <li><strong>Comuna:</strong> Ñuñoa</li>
+            <li><strong>Sector:</strong> Plaza Ñuñoa</li>
+            <li><strong>Organizador:</strong> Laura Díaz</li>
+            <li><strong>Email:</strong> laura@example.com</li>
+            <li><strong>Celular:</strong> +569.98765432</li>
+            <li><strong>Contacto por:</strong> TikTok: @frutastips</li>
+            <li><strong>Descripción:</strong> Aprende paso a paso a deshidratar fruta en casa.</li>
+            <li><strong>Tema:</strong> Comida</li>
+        </ul>
+
+        <h3>Galería de fotos</h3>
+        <div class="galeria">
+            <img src="../img/fruta.jpeg" alt="Fruta 1" onclick="ampliar(this)">
+            <img src="../img/fruta2.jpg" alt="Fruta 2" onclick="ampliar(this)">
+        </div>
+
+        <div id="imagen-ampliada">
+            <img src="../img/fruta.jpeg" alt="Grande" id="imagen-grande">
+            <div id="cerrar-imagen" onclick="cerrarImagen()">Cerrar</div>
+        </div>
+    </main>
+
+    <script>
+        function ampliar(img) {
+            document.getElementById('imagen-grande').src = img.src;
+            document.getElementById('imagen-ampliada').style.display = 'block';
+        }
+        function cerrarImagen() {
+            document.getElementById('imagen-ampliada').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

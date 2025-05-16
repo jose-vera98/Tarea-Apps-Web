@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle - Torneo Carecaca</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <h1>Detalle de Actividad</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../listado.html">Volver al listado</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Torneo Carecaca La Mona</h2>
+        <ul>
+            <li><strong>Inicio:</strong> 2025-05-15 13:30</li>
+            <li><strong>Término:</strong> 2025-05-15 15:00</li>
+            <li><strong>Región:</strong> Metropolitana</li>
+            <li><strong>Comuna:</strong> Santiago</li>
+            <li><strong>Sector:</strong> Beauchef 851, Sala CDI</li>
+            <li><strong>Organizador:</strong> Anakena FC</li>
+            <li><strong>Email:</strong> anakena@cdanakena.cl</li>
+            <li><strong>Celular:</strong> </li>
+            <li><strong>Contacto por:</strong> Instagram: @cdanakena</li>
+            <li><strong>Descripción:</strong> El torneo más épico del año entre facultades. ¡No te lo pierdas!</li>
+            <li><strong>Tema:</strong> Juegos</li>
+        </ul>
+
+        <h3>Galería de fotos</h3>
+        <div class="galeria">
+            <img src="../img/carecaca.jpeg" alt="Carecaca 1" onclick="ampliar(this)">
+            <img src="../img/carecaca2.jpg" alt="Carecaca 2" onclick="ampliar(this)">
+            <img src="../img/carecaca3.jpg" alt="Carecaca 3" onclick="ampliar(this)">
+            <img src="../img/carecaca4.jpg" alt="Carecaca 4" onclick="ampliar(this)">
+            <img src="../img/carecaca5.jpg" alt="Carecaca 5" onclick="ampliar(this)">
+        </div>
+
+        <div id="imagen-ampliada">
+            <img src="../img/carecaca.jpeg" alt="Grande" id="imagen-grande">
+            <div id="cerrar-imagen" onclick="cerrarImagen()">Cerrar</div>
+        </div>
+    </main>
+
+    <script>
+        function ampliar(img) {
+            document.getElementById('imagen-grande').src = img.src;
+            document.getElementById('imagen-ampliada').style.display = 'block';
+        }
+        function cerrarImagen() {
+            document.getElementById('imagen-ampliada').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
