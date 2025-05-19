@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Actividades</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <style>
+        tr:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Listado de actividades</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Inicio</a></li>
+                <li><a href="{{ url_for('mostrar_formulario') }}">Agregar actividad</a></li>
+                <li><a href="/estadisticas">Estadísticas</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Actividades registradas</h2>
+        <table class="tabla_actividades">
+            <thead>
+                <tr>
+                    <th>Inicio</th>
+                    <th>Término</th>
+                    <th>Comuna</th>
+                    <th>Sector</th>
+                    <th>Tema</th>
+                    <th>Organizador</th>
+                    <th>Total Fotos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for actividad in actividades %}
+					{% set detalle_url = url_for('detalle_actividad', id=actividad.id) %}
+					<tr onclick="location.href='{{ detalle_url }}'">
+						<td>{{ actividad.dia_hora_inicio.strftime('%Y-%m-%d %H:%M') }}</td>
+						<td>
+							{% if actividad.dia_hora_termino %}
+								{{ actividad.dia_hora_termino.strftime('%Y-%m-%d %H:%M') }}
+							{% else %}
+								—
+							{% endif %}
+						</td>
+						<td>{{ actividad.comuna.nombre }}</td>
+						<td>{{ actividad.sector }}</td>
+						<td>
+							{% if actividad.temas %}
+								{{ actividad.temas[0].tema }}
+							{% else %}
+								—
+							{% endif %}
+						</td>
+						<td>{{ actividad.nombre }}</td>
+						<td>{{ actividad.fotos|length }}</td>
+					</tr>
+				{% endfor %}
+
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
