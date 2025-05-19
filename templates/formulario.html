@@ -3,73 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar Actividad</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
-    <script src="{{ url_for('static', filename='js/validaciones.js') }}" defer></script>
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-    <h1>Agregar nueva actividad</h1>
+    <header>
+        <h1>Informar nueva actividad</h1>
+        <nav>
+            <a href="index.html">Inicio</a> |
+            <a href="listado.html">Ver actividades</a> |
+            <a href="estadisticas.html">Estadísticas</a>
+        </nav>
+    </header>
 
-    <form id="form-actividad" method="POST" enctype="multipart/form-data">
-        <!-- Sección 1: ¿Dónde? -->
+    <form id="form-actividad">
         <fieldset>
             <legend>¿Dónde?</legend>
+
             <label for="region">Región:</label>
             <select id="region" name="region">
-    			<option value="">Seleccione una región</option>
-    			{% for region in regiones %}
-       				<option value="{{ region.id }}">{{ region.nombre }}</option>
-    			{% endfor %}
-			</select>
-
+                <option value="">Seleccione una región</option>
+                <option value="RM">Región Metropolitana</option>
+                <option value="V">Valparaíso</option>
+            </select><br>
 
             <label for="comuna">Comuna:</label>
             <select id="comuna" name="comuna">
-    			<option value="">Seleccione una comuna</option>
-			</select>
-
+                <option value="">Seleccione una comuna</option>
+            </select><br>
 
             <label for="sector">Sector:</label>
             <input type="text" id="sector" name="sector" maxlength="100">
         </fieldset>
 
-        <!-- Sección 2: ¿Quién organiza? -->
         <fieldset>
             <legend>¿Quién organiza?</legend>
+
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" maxlength="200">
+            <input type="text" id="nombre" name="nombre" maxlength="200"><br>
 
-            <label for="email">Correo:</label>
-            <input type="email" id="email" name="email" maxlength="100">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" maxlength="100"><br>
 
-            <label for="celular">Celular:</label>
-            <input type="tel" id="celular" name="celular" placeholder="+569.12345678">
+            <label for="celular">Número de celular:</label>
+            <input type="tel" id="celular" name="celular" placeholder="+569.12345678"><br>
 
-            <div id="bloque-contactos"></div>
-            <button type="button" id="agregar-contacto">Agregar medio de contacto</button>
-
+            <label for="contactar_por">Contactar por:</label>
+            <select id="contactar_por" name="contactar_por">
+                <option value="">Seleccione</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="telegram">Telegram</option>
+                <option value="x">X</option>
+                <option value="instagram">Instagram</option>
+                <option value="tiktok">TikTok</option>
+                <option value="otra">Otra</option>
+            </select>
+            <div id="contacto_extra"></div>
         </fieldset>
 
-        <!-- Sección 3: ¿Cuándo y de qué trata? -->
         <fieldset>
             <legend>¿Cuándo y de qué trata?</legend>
-            <label for="inicio">Inicio:</label>
-            <input type="datetime-local" id="inicio" name="inicio">
 
-            <label for="termino">Término:</label>
-            <input type="datetime-local" id="termino" name="termino">
+            <label for="inicio">Fecha y hora de inicio:</label>
+            <input type="datetime-local" id="inicio" name="inicio"><br>
+
+            <label for="termino">Fecha y hora de término:</label>
+            <input type="datetime-local" id="termino" name="termino"><br>
 
             <label for="descripcion">Descripción:</label><br>
-            <textarea id="descripcion" name="descripcion" cols="50" rows="5"></textarea>
+            <textarea id="descripcion" name="descripcion" cols="50" rows="10"></textarea><br>
 
             <label for="tema">Tema:</label>
             <select id="tema" name="tema">
                 <option value="">Seleccione</option>
-                <option value="música">Música</option>
+                <option value="musica">Música</option>
                 <option value="deporte">Deporte</option>
                 <option value="ciencias">Ciencias</option>
-                <option value="religión">Religión</option>
-                <option value="política">Política</option>
-                <option value="tecnología">Tecnología</option>
+                <option value="religion">Religión</option>
+                <option value="politica">Política</option>
+                <option value="tecnologia">Tecnología</option>
                 <option value="juegos">Juegos</option>
                 <option value="baile">Baile</option>
                 <option value="comida">Comida</option>
@@ -79,7 +90,7 @@
 
             <label for="foto">Foto(s):</label>
             <div id="fotos">
-                <input type="file" name="foto[]" accept="image/*">
+                <input type="file" name="foto[]" id="foto" accept="image/*">
             </div>
             <button type="button" id="agregar-foto">Agregar otra foto</button>
         </fieldset>
@@ -87,15 +98,18 @@
         <br>
         <button type="submit">Agregar esta actividad</button>
     </form>
-</body>
-<div id="confirmacion" style="display: none;">
-    <p>¿Está seguro que desea agregar esta actividad?</p>
-    <button id="confirmar-si">Sí, estoy seguro</button>
-    <button id="confirmar-no">No, volver al formulario</button>
-</div>
 
-<div id="mensaje-final" style="display: none;">
-    <p>Hemos recibido su información, muchas gracias y suerte en su actividad</p>
-    <a href="/">Volver a la portada</a>
-</div>
+    <div id="confirmacion" style="display: none;">
+        <p>¿Está seguro que desea agregar esta actividad?</p>
+        <button id="confirmar-si">Sí, estoy seguro</button>
+        <button id="confirmar-no">No, volver al formulario</button>
+    </div>
+
+    <div id="mensaje-final" style="display: none;">
+        <p>Hemos recibido su información, muchas gracias y suerte en su actividad</p>
+        <a href="index.html">Volver a la portada</a>
+    </div>
+
+    <script src="js/validaciones.js"></script>
+</body>
 </html>
