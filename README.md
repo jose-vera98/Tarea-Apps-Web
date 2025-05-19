@@ -12,9 +12,9 @@ Lamentablemente lei mal el enunciado, por lo que me falto implementar la paginac
 
 Espero no sea mucho descuento por esto.
 
-Tambien quiero aclarar que por tiempo o cree ningun evento con sentido, todos eran dummys que hice a la rapida para probar. Puede que haga un commit adicional despues para agregar algunos nuevos a la bbdd, pero en caso que haga algun commit no sera para modificar codigo sino solo el contenido de la base de datos para que se pueda apreciar mejor todas las funcionalidades.
+Finalmente menciono que tuve problemas al crear mis bases de datos, especificamente al agregar datos en estas. Esto debido a que creo que no configure el idioma correctamente, y las tildes no las reconocio. Por esto me dio un par de errores muy puntuales, pero no supe arreglarlo (mas que nada por tiempo) asi que tal vez arroje algun error por eso. 
 
-Finalmente menciono que tuve problemas con la base de datos, y que cuando se creo no manejo correctamente las tildes. Asi que los temas con tilde no funcionan ya que no las encuentra en la base de datos. Se que es algo facil de arreglar pero no me dio tiempo. Puede que lo arrgle despues tambien, pero esto no se si ya es mucha modificacion a la entrega.
+Para la proxima le agregare mas detalles y tratare de mejorar el formato.
 
 ## Cómo correr el proyecto
 Mi recomendacion seria seguir los siguientes pasos, aunque no es necesario al 100% para que funcione.
@@ -70,9 +70,8 @@ No encontre como validar estos html, y probablemente se me haya pasado algun err
 |--- region-comuna.sql  
 |--- README.md
 
-## Créditos
 
-José Vera  
-CC5002 - Universidad de Chile
+
+
 
 PD: no he ido a casi ninguna clase, y todo el proyecto lo hice en base a mi experiencia con desarrollo web y flask. Espero no sea muy distinto de lo esperado.
