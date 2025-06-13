@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Estadísticas de Actividades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .grafico {
+            margin: 40px 0;
+        }
+
+        a {
+            display: block;
+            margin-top: 60px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Estadísticas de Actividades</h1>
+
+    <div id="grafico-lineas" class="grafico" style="width:100%; height:400px;"></div>
+    <div id="grafico-torta" class="grafico" style="width:100%; height:400px;"></div>
+    <div id="grafico-barras" class="grafico" style="width:100%; height:400px;"></div>
+
+    <a href="{{ url_for('index') }}">Volver a la portada</a>
+
+    <!-- Scripts de los graficos-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="{{ url_for('static', filename='js/estadisticas.js') }}"></script>
+</body>
+</html>
