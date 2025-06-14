@@ -71,6 +71,36 @@
         {% else %}
             <p>No hay fotos disponibles.</p>
         {% endif %}
+
+        <h2>Agregar Comentario</h2>
+
+        <form id="comentario-form">
+          <input type="hidden" name="actividad_id" value="{{ actividad.id }}">
+
+          <label for="nombre">Nombre:</label><br>
+          <input type="text" id="nombre" name="nombre" required minlength="3" maxlength="80"><br><br>
+
+          <label for="texto">Comentario:</label><br>
+          <textarea id="texto" name="texto" rows="4" cols="50" required minlength="5"></textarea><br><br>
+
+          <button type="submit">Agregar comentario</button>
+        </form>
+
+        <div id="comentario-error" style="color: red;"></div>
+        <div id="comentario-exito" style="color: green;"></div>
+
+        <h2>Comentarios recientes</h2>
+        {% if comentarios %}
+            <ul>
+                {% for c in comentarios %}
+                    <li><strong>{{ c.nombre }}</strong> ({{ c.fecha.strftime('%Y-%m-%d %H:%M') }}):<br>
+                        {{ c.texto }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay comentarios aún.</p>
+        {% endif %}
     </main>
 
     <script>
@@ -85,5 +115,8 @@
             document.getElementById('imagen-ampliada').style.display = 'none';
         }
     </script>
+
+    <!-- Script de comentarios externo -->
+    <script src="{{ url_for('static', filename='js/comentarios.js') }}"></script>
 </body>
 </html>
