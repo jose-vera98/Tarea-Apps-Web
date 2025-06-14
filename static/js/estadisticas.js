@@ -35,7 +35,7 @@ fetch('/api/actividades_por_momento_del_dia')
     .then(data => {
         Highcharts.chart('grafico-barras', {
             chart: { type: 'column' },
-            title: { text: 'Actividades por Momento del Día y Mes' },
+            title: { text: 'Actividades por Momento del Dia y Mes' },
             xAxis: {
                 categories: data.map(d => d.mes),
                 crosshair: true
@@ -57,7 +57,7 @@ fetch('/api/actividades_por_momento_del_dia')
                     data: data.map(d => d.mañana || 0)
                 },
                 {
-                    name: 'Mediodía',
+                    name: 'Mediodia',
                     data: data.map(d => d.mediodía || 0)
                 },
                 {

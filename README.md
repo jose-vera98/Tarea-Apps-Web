@@ -4,17 +4,17 @@ Curso: CC5002 - 2025-1
 
 ## Descripción del proyecto
 
-En el presente proyecto se encuentra la solucion a la Tarea 2 del curso de Apps Web.
+En este proyecto se encuentra la solución a la Tarea 3 del curso de Apps Web.
 
-Como no entregue la T1, el formato es muy crudo, y decidi enfocarme mas en las funcionalidades. 
+Como no entregué la T1, el formato sigue siendo bastante crudo, y decidí enfocarme principalmente en implementar correctamente las funcionalidades solicitadas.
 
-Lamentablemente lei mal el enunciado, por lo que me falto implementar la paginacion en el listado de actividades, pero no me tiempo de agregarlo. 
+En cuanto a la Tarea 2, no logré corregir los errores pendientes, como la falta de paginación en el listado de actividades, y tampoco pude solucionar los problemas de codificación que provocaron errores con tildes en algunas inserciones. Esto puede generar errores muy puntuales que la verdad no me tome el tiempo de solucionar.
 
-Espero no sea mucho descuento por esto.
+Respecto a la Tarea 3, implementé los gráficos y el sistema de comentarios. Sin embargo, no alcancé a revisar en detalle el correcto funcionamiento visual de los gráficos. Puede que tenga alguna falla. Con respecto a los comentarios, no logré solucionar un problema que me surgio donde el primer comentario no se muestra automáticamente tras enviarlo, hay que recargar la patgina. Pero si ya hay un comentario, se recargan automaticamwnte.
 
-Finalmente menciono que tuve problemas al crear mis bases de datos, especificamente al agregar datos en estas. Esto debido a que creo que no configure el idioma correctamente, y las tildes no las reconocio. Por esto me dio un par de errores muy puntuales, pero no supe arreglarlo (mas que nada por tiempo) asi que tal vez arroje algun error por eso. 
+Tampoco me dio tiempo de revisar las validaciones de html.
 
-Para la proxima le agregare mas detalles y tratare de mejorar el formato.
+ Espero que los errores menores no afecten mucho la evaluación, y agradezco cualquier feedback que me permita mejorar en la tarea 4.
 
 ## Cómo correr el proyecto
 Mi recomendacion seria seguir los siguientes pasos, aunque no es necesario al 100% para que funcione.
@@ -44,6 +44,12 @@ Mi recomendacion seria seguir los siguientes pasos, aunque no es necesario al 10
 - Las fotos se suben a /static/fotos/, con renombramiento si el nombre ya existe.
 - La paginación no fue implementada por falta de tiempo.
 
+Para la tarea 3: 
+-Se utilizó la librería Highcharts para los gráficos, ya que fue recomendada en el enunciado y permite una integración sencilla con JavaScript y Flask.
+
+-Las consultas a la base de datos se realizaron usando SQL crudo con text(), sin usar ORM, para tener mayor control sobre agregaciones, fechas y uniones. y la verdad me manejo mas con sql.
+
+
 ## Validación HTML y CSS
 
 Se detectaron múltiples errores al usar validator.w3.org y jigsaw.w3.org.  
@@ -55,23 +61,25 @@ No encontre como validar estos html, y probablemente se me haya pasado algun err
 .
 |--- app.py  
 |--- models.py  
+|--- requirements.txt  
 |--- static/  
-|   |--- css/estilos.css  
-|   |--- js/validaciones.js  
+|   |--- css/  
+|   |   |--- estilos.css  
+|   |--- js/  
+|   |   |--- validaciones.js  
+|   |   |--- estadisticas.js  
+|   |   |--- comentarios.js  
 |   |--- fotos/  
-|
+|   |--- sql/  
+|       |--- tarea2.sql  
+|       |--- region-comuna.sql  
+|       |--- tabla-comentario.sql  
 |--- templates/  
 |   |--- index.html  
 |   |--- formulario.html  
 |   |--- listado.html  
-|   |--- detalle.html 
-| 
-|---tarea2.sql  
-|--- region-comuna.sql  
+|   |--- detalle.html  
+|   |--- estadisticas.html  
 |--- README.md
 
 
-
-
-
-PD: no he ido a casi ninguna clase, y todo el proyecto lo hice en base a mi experiencia con desarrollo web y flask. Espero no sea muy distinto de lo esperado.

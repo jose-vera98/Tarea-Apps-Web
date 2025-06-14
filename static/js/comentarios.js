@@ -11,7 +11,7 @@ document.getElementById('comentario-form').addEventListener('submit', async func
     exitoDiv.textContent = '';
 
     if (nombre.length < 3 || nombre.length > 80 || texto.length < 5) {
-        errorDiv.textContent = "Debe ingresar un nombre válido (3-80) y un comentario de al menos 5 caracteres.";
+        errorDiv.textContent = "Debe ingresar un nombre valido (3-80) y un comentario de al menos 5 caracteres de largo";
         return;
     }
 
@@ -24,7 +24,7 @@ document.getElementById('comentario-form').addEventListener('submit', async func
 
         const data = await res.json();
         if (data.ok) {
-            exitoDiv.textContent = "Comentario agregado con éxito.";
+            exitoDiv.textContent = "Comentario agregado con exito.";
             document.getElementById('comentario-form').reset();
 
             // Insertar nuevo comentario en el DOM
@@ -42,9 +42,9 @@ document.getElementById('comentario-form').addEventListener('submit', async func
             }
 
         } else {
-            errorDiv.textContent = data.error || "Error al agregar comentario.";
+            errorDiv.textContent = data.error || "Error al agregar comentario";
         }
     } catch (err) {
-        errorDiv.textContent = "Error en la conexión con el servidor.";
+        errorDiv.textContent = "Error en la conexion con el servidor";
     }
 });
