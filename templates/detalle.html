@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Actividad - {{ actividad.nombre }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Detalle de Actividad</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Inicio</a></li>
+                <li><a href="{{ url_for('listado_actividades') }}">Volver al listado</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>{{ actividad.nombre }}</h2>
+        <ul>
+            <li><strong>Inicio:</strong> {{ actividad.dia_hora_inicio.strftime('%Y-%m-%d %H:%M') }}</li>
+            <li><strong>Término:</strong>
+                {% if actividad.dia_hora_termino %}
+                    {{ actividad.dia_hora_termino.strftime('%Y-%m-%d %H:%M') }}
+                {% else %} —
+                {% endif %}
+            </li>
+            <li><strong>Región:</strong> {{ actividad.comuna.region.nombre }}</li>
+            <li><strong>Comuna:</strong> {{ actividad.comuna.nombre }}</li>
+            <li><strong>Sector:</strong> {{ actividad.sector }}</li>
+            <li><strong>Organizador:</strong> {{ actividad.nombre }}</li>
+            <li><strong>Email:</strong> {{ actividad.email }}</li>
+            <li><strong>Celular:</strong> {{ actividad.celular or '—' }}</li>
+            <li><strong>Contacto por:</strong>
+                {% if actividad.contactos %}
+                    <ul>
+                        {% for contacto in actividad.contactos %}
+                            <li>{{ contacto.nombre }}: {{ contacto.identificador }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    No especificado
+                {% endif %}
+            </li>
+            <li><strong>Descripción:</strong> {{ actividad.descripcion }}</li>
+            <li><strong>Tema:</strong>
+                {% if actividad.temas %}
+                    {{ actividad.temas[0].tema }}
+                    {% if actividad.temas[0].tema == 'otro' and actividad.temas[0].glosa_otro %}
+                        ({{ actividad.temas[0].glosa_otro }})
+                    {% endif %}
+                {% else %}
+                    —
+                {% endif %}
+            </li>
+        </ul>
+
+        <h3>Galería de fotos</h3>
+        {% if actividad.fotos %}
+        <div class="galeria">
+            {% for foto in actividad.fotos %}
+                <img src="{{ url_for('static', filename=foto.ruta_archivo) }}" alt="Foto {{ loop.index }}" onclick="ampliar(this)">
+            {% endfor %}
+        </div>
+
+        <div id="imagen-ampliada">
+            <img src="{{ url_for('static', filename=actividad.fotos[0].ruta_archivo) }}" alt="Grande" id="imagen-grande">
+            <div id="cerrar-imagen" onclick="cerrarImagen()">Cerrar</div>
+        </div>
+        {% else %}
+            <p>No hay fotos disponibles.</p>
+        {% endif %}
+    </main>
+
+    <script>
+        function ampliar(img) {
+            const grande = document.getElementById('imagen-grande');
+            const contenedor = document.getElementById('imagen-ampliada');
+            grande.src = img.src;
+            contenedor.style.display = 'block';
+        }
+
+        function cerrarImagen() {
+            document.getElementById('imagen-ampliada').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
