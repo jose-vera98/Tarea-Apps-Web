@@ -145,7 +145,67 @@ def detalle_actividad(id):
     return render_template('detalle.html', actividad=actividad)
 
 
+#Tarea 3
 
+##Ruta de la pagina de estadisticas
+@app.route('/estadisticas')
+def estadisticas():
+    return render_template("estadisticas.html")
+
+
+#Rutas de apis para alimentar los jsons para las estadisticas
+
+#Actividades por dia
+@app.route('/api/actividades_por_dia')
+def actividades_por_dia():
+    query = """
+        SELECT fecha_inicio, COUNT(*) as cantidad
+        FROM actividad
+        GROUP BY fecha_inicio
+        ORDER BY fecha_inicio
+    """
+    resultados = db.session.execute(query).fetchall()
+    datos = [{"fecha": str(f[0]), "cantidad": f[1]} for f in resultados]
+    return jsonify(datos)
+
+
+#Actividades por tipo
+@app.route('/api/actividades_por_tipo')
+def actividades_por_tipo():
+    query = """
+        SELECT tipo, COUNT(*) as cantidad
+        FROM actividad
+        GROUP BY tipo
+    """
+    resultados = db.session.execute(query).fetchall()
+    datos = [{"tipo": r[0], "cantidad": r[1]} for r in resultados]
+    return jsonify(datos)
+
+
+#Actividades por momento del dia
+@app.route('/api/actividades_por_momento_del_dia')
+def actividades_por_momento_del_dia():
+    query = """
+        SELECT 
+            DATE_FORMAT(fecha_inicio, '%Y-%m') as mes,
+            CASE 
+                WHEN HOUR(hora_inicio) < 12 THEN 'mañana'
+                WHEN HOUR(hora_inicio) < 18 THEN 'mediodía'
+                ELSE 'tarde'
+            END as momento,
+            COUNT(*) as cantidad
+        FROM actividad
+        GROUP BY mes, momento
+        ORDER BY mes
+    """
+    resultados = db.session.execute(query).fetchall()
+    datos = {}
+    for mes, momento, cantidad in resultados:
+        if mes not in datos:
+            datos[mes] = {"mañana": 0, "mediodía": 0, "tarde": 0}
+        datos[mes][momento] = cantidad
+    datos_final = [{"mes": k, **v} for k, v in datos.items()]
+    return jsonify(datos_final)
 
 if __name__ == '__main__':
     app.run(debug=True)
