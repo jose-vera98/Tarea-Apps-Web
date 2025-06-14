@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from models import Actividad, db, Region, ActividadTema, ContactarPor, Comuna, Foto
-from flask import jsonify
 from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
+from sqlalchemy import text
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://cc5002:programacionweb@localhost:3306/tarea2'
@@ -142,7 +143,15 @@ def listado_actividades():
 @app.route('/actividad/<int:id>')
 def detalle_actividad(id):
     actividad = Actividad.query.get_or_404(id)
-    return render_template('detalle.html', actividad=actividad)
+
+    comentarios = db.session.execute(text("""
+        SELECT nombre, texto, fecha
+        FROM comentario
+        WHERE actividad_id = :id
+        ORDER BY fecha DESC
+    """), {"id": id}).fetchall()
+
+    return render_template('detalle.html', actividad=actividad, comentarios=comentarios)
 
 
 #Tarea 3
@@ -158,47 +167,51 @@ def estadisticas():
 #Actividades por dia
 @app.route('/api/actividades_por_dia')
 def actividades_por_dia():
-    query = """
-        SELECT fecha_inicio, COUNT(*) as cantidad
+    resultados = db.session.execute(text("""
+        SELECT DATE(dia_hora_inicio) AS fecha, COUNT(*) as cantidad
         FROM actividad
-        GROUP BY fecha_inicio
-        ORDER BY fecha_inicio
-    """
-    resultados = db.session.execute(query).fetchall()
+        GROUP BY fecha
+        ORDER BY fecha
+    """)).fetchall()
+
     datos = [{"fecha": str(f[0]), "cantidad": f[1]} for f in resultados]
     return jsonify(datos)
+
 
 
 #Actividades por tipo
 @app.route('/api/actividades_por_tipo')
 def actividades_por_tipo():
-    query = """
-        SELECT tipo, COUNT(*) as cantidad
-        FROM actividad
-        GROUP BY tipo
-    """
-    resultados = db.session.execute(query).fetchall()
+    resultados = db.session.execute(text("""
+        SELECT at.tema, COUNT(*) as cantidad
+        FROM actividad a
+        JOIN actividad_tema at ON a.id = at.actividad_id
+        GROUP BY at.tema
+        ORDER BY cantidad DESC
+    """)).fetchall()
+
     datos = [{"tipo": r[0], "cantidad": r[1]} for r in resultados]
     return jsonify(datos)
+
 
 
 #Actividades por momento del dia
 @app.route('/api/actividades_por_momento_del_dia')
 def actividades_por_momento_del_dia():
-    query = """
+    resultados = db.session.execute(text("""
         SELECT 
-            DATE_FORMAT(fecha_inicio, '%Y-%m') as mes,
+            DATE_FORMAT(dia_hora_inicio, '%Y-%m') AS mes,
             CASE 
-                WHEN HOUR(hora_inicio) < 12 THEN 'mañana'
-                WHEN HOUR(hora_inicio) < 18 THEN 'mediodía'
+                WHEN HOUR(dia_hora_inicio) < 12 THEN 'mañana'
+                WHEN HOUR(dia_hora_inicio) < 18 THEN 'mediodía'
                 ELSE 'tarde'
-            END as momento,
-            COUNT(*) as cantidad
+            END AS momento,
+            COUNT(*) AS cantidad
         FROM actividad
         GROUP BY mes, momento
         ORDER BY mes
-    """
-    resultados = db.session.execute(query).fetchall()
+    """)).fetchall()
+
     datos = {}
     for mes, momento, cantidad in resultados:
         if mes not in datos:
@@ -206,6 +219,33 @@ def actividades_por_momento_del_dia():
         datos[mes][momento] = cantidad
     datos_final = [{"mes": k, **v} for k, v in datos.items()]
     return jsonify(datos_final)
+
+
+##Implementacion de comentarios:
+@app.route('/api/comentario', methods=['POST'])
+def agregar_comentario():
+    data = request.get_json()
+    nombre = data.get('nombre', '').strip()
+    texto = data.get('texto', '').strip()
+    actividad_id = data.get('actividad_id')
+
+    if not nombre or not texto or len(nombre) < 3 or len(nombre) > 80 or len(texto) < 5:
+        return jsonify({"ok": False, "error": "Datos inválidos"}), 400
+
+    try:
+        db.session.execute(text("""
+            INSERT INTO comentario (nombre, texto, fecha, actividad_id)
+            VALUES (:nombre, :texto, NOW(), :actividad_id)
+        """), {
+            "nombre": nombre,
+            "texto": texto,
+            "actividad_id": actividad_id
+        })
+        db.session.commit()
+        return jsonify({"ok": True})
+    except Exception as e:
+        return jsonify({"ok": False, "error": str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
