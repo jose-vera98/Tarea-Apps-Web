@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividades Cerca de José</title> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <h1>Bienvenido a Actividades Cerca de José Vera</h1>
+    <h2>Un sitio donde podrás ver las actividades cerca de ti</h2>
+
+    <nav>
+        <ul>
+            <li><a href="/formulario">Agregar actividad</a></li>
+            <li><a href="/actividades">Ver listado de actividades</a></li>
+            <li><a href="/estadisticas">Estadísticas</a></li>
+        </ul>
+    </nav>
+
+    <h2>Últimas actividades</h2>
+    <table class ="tabla_actividades">
+        <thead>
+            <tr>
+                <th>Inicio</th>
+                <th>Término</th>
+                <th>Comuna</th>
+                <th>Sector</th>
+                <th>Tema</th>
+                <th>Foto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for actividad in actividades %}
+            <tr>
+                <td>{{ actividad.dia_hora_inicio }}</td>
+                <td>{{ actividad.dia_hora_termino or '—' }}</td>
+                <td>{{ actividad.comuna.nombre }}</td>
+                <td>{{ actividad.sector }}</td>
+                <td>
+                    {% if actividad.temas %}
+                        {{ actividad.temas[0].tema }}
+                    {% else %}
+                        Sin tema
+                    {% endif %}
+                </td>
+                <td>
+                    {% if actividad.fotos %}
+                        <img src="{{ url_for('static', filename=actividad.fotos[0].ruta_archivo) }}"
+                            alt="foto" width="100">
+                    {% else %}
+                        Sin imagen
+                    {% endif %}
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+header h1 {
+    color: #333;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: darkblue;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+
+.tabla-actividades,
+.tabla-actividades th,
+.tabla-actividades td {
+    border: 1px solid #999;
+    border-collapse: collapse;
+}
+
+
+/* Estilos para los detalles de las actividades */
+.galeria img {
+    width: 320px;
+    height: 240px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#imagen-ampliada {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 10px;
+    border: 2px solid #000;
+    z-index: 1000;
+}
+
+#imagen-ampliada img {
+    width: 800px;
+    height: 600px;
+}
+
+#cerrar-imagen {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
